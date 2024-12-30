@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptiq Testing</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Adaptiq Testing</h1>
+        <!-- Grade and Chapter Selection Form -->
+        <form id="test-form" action="/start_test" method="POST">
+            <label for="grade">Select Grade:</label>
+            <select id="grade" name="grade" required>
+                <option value="" disabled selected>Select Grade</option>
+                <!-- Dynamic grade options rendered from Flask -->
+                {% for grade in grades %}
+                    <option value="{{ grade }}">{{ grade }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="chapter">Select Chapter:</label>
+            <select id="chapter" name="chapter" required>
+                <option value="" disabled selected>Select Chapter</option>
+            </select>
+
+            <button type="submit">Start Test</button>
+        </form>
+
+        <!-- Question and Answer Section -->
+        <div id="questionSection" style="display: none;">
+            <h2>Question</h2>
+            <p id="questionType"></p>
+            <p id="questionText"></p>
+            <label for="answer">Your Answer:</label>
+            <textarea id="answer" name="answer" rows="4" required></textarea>
+            <button id="submitAnswer" type="button">Submit Answer</button>
+        </div>
+
+        <!-- Feedback Section -->
+        <div id="feedbackSection" style="display: none;">
+            <h2>Feedback</h2>
+            <p id="feedbackText"></p>
+            <button id="nextQuestion" type="button">Next Question</button>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
