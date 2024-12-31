@@ -9,12 +9,11 @@
 <body>
     <div class="container">
         <h1>Welcome to Adaptiq Testing</h1>
-        <!-- Grade and Chapter Selection Form -->
-        <form id="test-form" action="/start_test" method="POST">
+        <!-- Form to select grade and chapter -->
+        <form id="test-form">
             <label for="grade">Select Grade:</label>
             <select id="grade" name="grade" required>
                 <option value="" disabled selected>Select Grade</option>
-                <!-- Dynamic grade options rendered from Flask -->
                 {% for grade in grades %}
                     <option value="{{ grade }}">{{ grade }}</option>
                 {% endfor %}
@@ -25,24 +24,24 @@
                 <option value="" disabled selected>Select Chapter</option>
             </select>
 
-            <button type="submit">Start Test</button>
+            <button type="button" id="start-test">Start Test</button>
         </form>
 
-        <!-- Question and Answer Section -->
-        <div id="questionSection" style="display: none;">
+        <!-- Container for displaying questions -->
+        <div id="question-container" style="display: none;">
             <h2>Question</h2>
-            <p id="questionType"></p>
-            <p id="questionText"></p>
-            <label for="answer">Your Answer:</label>
-            <textarea id="answer" name="answer" rows="4" required></textarea>
-            <button id="submitAnswer" type="button">Submit Answer</button>
+            <p id="question-text"></p>
+            <input type="text" id="answer" placeholder="Type your answer here" />
+            <button id="submit-answer">Submit Answer</button>
+            <button id="next-question" style="display: none;">Next Question</button>
+
+            <button id="end-test">End Test</button>
         </div>
 
-        <!-- Feedback Section -->
-        <div id="feedbackSection" style="display: none;">
+        <!-- Container for feedback -->
+        <div id="feedback-container" style="display: none;">
             <h2>Feedback</h2>
-            <p id="feedbackText"></p>
-            <button id="nextQuestion" type="button">Next Question</button>
+            <p id="feedback"></p>
         </div>
     </div>
 
