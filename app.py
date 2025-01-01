@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 # Hugging Face API setup
 model_id = "google/gemma-2-2b-it"  # Replace with your model ID
-token = "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"  # Replace with your token
+token = "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"  # Replace with your token
 client = InferenceClient(model=model_id, token=token)
 
-# Topics structure with prerequisite links
+# Topics structure with prerequisite links and difficulty levels
 topics = {
     "Grade 10": {
         "Light": {
@@ -23,7 +23,11 @@ topics = {
             }
         },
         "Electricity": {
-            "Electricity quantities": {}
+            "Electric current and circuits": {},
+            "Electric Potential and Potential difference": {},
+            "Ohm's Law": {},
+            "Resistance": {},
+            "Heating effect of electric current": {}
         },
         "Electromagnetism": {
             "Magnetism": {},
@@ -50,21 +54,28 @@ topics = {
             "Motion": {}
         },
         "Motion": {
-            "Speed": {}
+            "Speed": {},
+            "Velocity": {},
+            "Acceleration": {}
         }
     }
 }
 
 # Store user state and performance
 user_state = {
+    "grade": None,
     "current_topic": None,
+    "previous_topic": None,
     "question_history": [],
-    "performance": []
+    "performance": [],
+    "asked_questions": {},  # Track questions asked per topic
+    "current_difficulty": "easy"  # Track current difficulty level
 }
 
-# Helper function: Generate a question
-def generate_question(topic, question_type):
-    prompt = f"Generate a standard {question_type} question for the topic: {topic}, without including the answer."
+
+# Helper function: Generate a question with difficulty level
+def generate_question(topic, question_type, difficulty):
+    prompt = f"You are a physics teacher testing core conceptual understanding of a student. Generate a standard {question_type} question for the topic: {topic} at {difficulty} difficulty level, without including the answer."
     try:
         response = client.text_generation(prompt, max_new_tokens=200)
         if isinstance(response, dict):
@@ -116,20 +127,37 @@ def start_test():
     if grade not in topics or chapter not in topics[grade]:
         return jsonify({'error': 'Invalid grade or chapter.'}), 400
 
+    user_state["grade"] = grade
     user_state["current_topic"] = chapter
+    user_state["previous_topic"] = None
     user_state["question_history"] = []
     user_state["performance"] = []
-    return jsonify({'message': f"Test started for chapter: {chapter}"})
+    user_state["asked_questions"] = {}
+    user_state["current_difficulty"] = "easy"
 
+    # Generate the first easy question for the selected topic
+    question = generate_question(chapter, "MCQ", difficulty="easy")
+    user_state["asked_questions"].setdefault(chapter, []).append(question)
+    user_state["question_history"].append({"topic": chapter, "question": question})
 
-def get_prerequisites(grade, chapter):
-    # Ensure we are getting the correct subtopics or prerequisites for the given chapter
+    return jsonify({'message': f"Test started for chapter: {chapter}", "question": question, "difficulty": "easy"})
+# Helper function: Get prerequisites for a topic
+def get_prerequisites(chapter):
+    grade = user_state["grade"]
     if grade in topics and chapter in topics[grade]:
-        subtopics = list(topics[grade][chapter].keys())
-        if subtopics:
-            return subtopics
+        return list(topics[grade][chapter].keys())
     return []
 
+# Helper function: Get the next topic in prerequisites
+def get_next_prerequisite(chapter):
+    prerequisites = get_prerequisites(chapter)
+    for prereq in prerequisites:
+        if prereq not in user_state["asked_questions"]:
+            return prereq
+        deeper_prereq = get_next_prerequisite(prereq)
+        if deeper_prereq:
+            return deeper_prereq
+    return None
 # Route: Submit answer
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer():
@@ -155,66 +183,60 @@ def submit_answer():
         "feedback": feedback
     })
 
-    # Prepare response
     response = {
         "feedback": feedback,
         "correctness": "correct" if "correct" in feedback.lower() else "incorrect"
     }
 
-    # Backtrack if the answer is incorrect
+    # If the answer is incorrect, backtrack to prerequisites
     if "incorrect" in feedback.lower():
-        grade = data.get('grade')
-        chapter = data.get('chapter')
+        next_topic = get_next_prerequisite(user_state["current_topic"])
+        if next_topic:
+            user_state["previous_topic"] = user_state["current_topic"]
+            user_state["current_topic"] = next_topic
+            user_state["current_difficulty"] = "easy"
 
-        if grade and chapter:
-            # Get prerequisites (subtopics) for the current chapter
-            prerequisites = get_prerequisites(grade, chapter)
-            if prerequisites:
-                next_topic = prerequisites[0]  # You can choose to backtrack to any prerequisite
-                user_state["current_topic"] = next_topic  # Update the current topic
-                question = generate_question(next_topic, random.choice(["MCQ", "descriptive"]))
-                user_state["question_history"].append({"topic": next_topic, "question": question})
-                response.update({
-                    "next_question": question,
-                    "next_topic": next_topic
-                })
-                return jsonify(response)
+            # Generate a question for the new topic
+            question = generate_question(next_topic, "MCQ", difficulty="easy")
+            user_state["asked_questions"].setdefault(next_topic, []).append(question)
+            user_state["question_history"].append({"topic": next_topic, "question": question})
 
-    # Generate a new question if no backtracking is required
-    topic = user_state["current_topic"]
-    question = generate_question(topic, random.choice(["MCQ", "descriptive"]))
-    user_state["question_history"].append({"topic": topic, "question": question})
-    response.update({"next_question": question, "next_topic": topic})
+            response.update({
+                "message": f"Backtracking... Current topic: {user_state['current_topic']}, Previous topic: {user_state['previous_topic']}",
+                "next_question": question,
+                "next_topic": next_topic,
+                "difficulty": "easy"
+            })
+            return jsonify(response)
+
+    # Adjust difficulty for the next question
+    if user_state["current_difficulty"] == "easy":
+        user_state["current_difficulty"] = "medium"
+    elif user_state["current_difficulty"] == "medium":
+        user_state["current_difficulty"] = "hard"
+
     return jsonify(response)
-
 # Route: Get the next question
 @app.route('/next_question', methods=['POST'])
 def next_question():
-    data = request.json
-    last_answer = data.get('last_answer', None)
+    if not user_state["current_topic"]:
+        return jsonify({"error": "No topic selected. Please start a test first."}), 400
 
-    # If the user has answered a question, analyze it
-    if user_state["question_history"]:
-        last_question = user_state["question_history"][-1]
-        feedback = analyze_answer(last_question['question'], last_answer)
-        user_state["performance"].append({
-            "question": last_question['question'],
-            "answer": last_answer,
-            "feedback": feedback
-        })
-        if "incorrect" in feedback.lower():
-            # Backtrack to prerequisite topic if available
-            prerequisites = list(topics[user_state["current_topic"]].keys())
-            if prerequisites:
-                next_topic = prerequisites[0]
-                user_state["current_topic"] = next_topic
-                question = generate_question(next_topic, random.choice(["MCQ", "descriptive"]))
-                user_state["question_history"].append({"topic": next_topic, "question": question})
-                return jsonify({"question": question, "topic": next_topic})
-
-    # Generate the next question for the current topic
+    # Generate the next question for the current topic based on difficulty level
     topic = user_state["current_topic"]
-    question = generate_question(topic, random.choice(["MCQ", "descriptive"]))
+    difficulty = "easy" if len(user_state["question_history"]) == 0 else ("medium" if len(user_state["question_history"]) == 1 else "hard")
+
+    # Ensure no repeated questions
+    while True:
+        question = generate_question(topic, random.choice(["MCQ", "descriptive"]), difficulty)
+        if question not in user_state["asked_questions"].get(topic, []):
+            break
+
+    # Track the asked question
+    if topic not in user_state["asked_questions"]:
+        user_state["asked_questions"][topic] = []
+    user_state["asked_questions"][topic].append(question)
+
     user_state["question_history"].append({"topic": topic, "question": question})
     return jsonify({"question": question, "topic": topic})
 
