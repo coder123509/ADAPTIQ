@@ -10,8 +10,8 @@ app.config['SESSION_TYPE'] = 'filesystem'
 with open("topics.json", 'r') as file:
     topics_data = json.load(file)
 
-model_id = "mistralai/Mistral-7B-Instruct-v0.3"
-token = "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"
+model_id = "google/gemma-2-2b-it"
+token = "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"
 adaptiq_cli = AdaptiqCLI(model_id, token, topics_data)
 
 @app.route('/')
