@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile">
+    <h2 class="profile-header">User Profile</h2>
+
+    <!-- Statistics Section -->
+    <div class="profile-stats">
+        <p class="profile-stat"><strong>Total Topics Attempted:</strong> {{ total_topics }}</p>
+        <p class="profile-stat"><strong>Correct Topics:</strong> {{ correct_topics }}</p>
+        <p class="profile-stat"><strong>Accuracy:</strong> {{ accuracy }}%</p>
+    </div>
+
+    <!-- Topics to Improve Section -->
+    <div class="profile-section">
+        <h3 class="profile-subheader">Topics to Improve</h3>
+        <ul class="profile-list">
+            {% if topics_to_improve %}
+                {% for topic in topics_to_improve %}
+                    <li class="profile-item">{{ topic }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="profile-item">None! Great work!</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <!-- Topics Done Well Section -->
+    <div class="profile-section">
+        <h3 class="profile-subheader">Topics Done Well</h3>
+        <ul class="profile-list">
+            {% if topics_done_well %}
+                {% for topic in topics_done_well %}
+                    <li class="profile-item">{{ topic }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="profile-item">No topics completed yet.</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

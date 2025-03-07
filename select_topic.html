@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="select-topic">
+    <h2 class="select-topic-h2">Select Topic</h2>
+    <form class="select-topic-form" id="topic-form" action="/generate_question" method="POST">
+        <label for="grade">Grade:</label>
+        <select id="grade" name="grade" required>
+            <option value="">Select Grade</option>
+        </select>
+
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject" required>
+            <option value="Physics">Physics</option> <!-- Physics is always available -->
+        </select>
+
+        <label for="topic">Topic:</label>
+        <select id="topic" name="topic" required>
+            <option value="">Select Topic</option>
+        </select>
+
+        <!-- Submit button to send the selected topic -->
+        <button class="assessment-button" type="submit" id="submit-btn" disabled>Start Assessment</button>
+    </form>
+
+    <!-- Pass the topics data dynamically (already in the form of JSON) -->
+    <script type="application/json" id="topics-data">
+        {{ topics_data | tojson | safe }}
+    </script>
+
+    <script src="{ url_for('static', filename='topic_selection.js') }"></script>
+</div>
+{% endblock %}

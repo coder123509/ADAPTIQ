@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="main">
+        <div class="interactive_section">
+            <!-- Image Section -->
+            <div class="image_section">
+            <img src="{{ url_for('static', filename='study.jpg') }}" alt="Project Image" class="project_image">
+            </div>
+
+            <div class="right_side">
+                <!-- Profile Picture Section -->
+                <div class="profile_picture_section">
+                    <div class="profile_picture_placeholder">
+                        <!-- Placeholder for a profile picture -->
+                        <p>Your Profile Picture</p>
+                    </div>
+                </div>
+
+                <!-- Button Section -->
+                <div class="button_set">
+                    <button onclick="window.location.href='/profile'">Go to Profile</button>
+                    <button onclick="window.location.href='/select_topic'">Select Topics</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about_section">
+            <h2>About the Project</h2>
+            <p>
+                This project is a dynamic learning platform powered by AdaptIQ, where students can take quizzes and receive real-time feedback on their answers. 
+                The system helps track performance and provides personalized suggestions for improvement. 
+                It's designed to improve the learning experience with instant feedback and intelligent assessments.
+            </p>
+        </div>
+
+    </div>
+{% endblock %}

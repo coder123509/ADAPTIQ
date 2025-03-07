@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="generate-question">
+    <h4 class="generate-question-h4">Topic: {{ current_subtopic }}</h4>
+    
+    <p class="generate-question-p">{{ question }}</p>
+
+    <!-- Form to submit the answer -->
+    <form class="generate-question-form" method="POST" action="{{ url_for('generate_feedback') }}">
+        <textarea class="generate-question-textarea" id="answer" name="answer" rows="4" placeholder="Your answer..." required></textarea>
+
+        <button class="generate-question-button" type="submit" class="btn btn-primary">Submit Answer</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="generate-question">
+    <h4 class="generate-question-h4">Topic: {{ current_subtopic }}</h4>
+
+    <p class="generate-feedback-p">{{ question }}</p>
+    <p class="generate-feedback-answer">Feedback: {{ feedback }}</p>
+
+    <!-- Button to proceed to the next question -->
+    <form method="POST" action="{{ url_for('send_question') }}">
+        <button type="submit" class="generate-question-button">Next Question</button>
+    </form>
+
+</div>
+{% endblock %}
