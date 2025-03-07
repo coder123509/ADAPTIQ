@@ -26,6 +26,6 @@ Why ADAPTIQ?
 ✅ Personalized learning experience – AI adapts to each student’s learning pace and needs.
 ✅ Encourages real-world application – By reinforcing strong foundations, students can apply their knowledge more effectively in practical and competitive scenarios.
 
-Project Developers-
+Project Team-
 👨‍💻 Abhinav Krishna Rayachoti 
 👩‍💻 Abhishek Varma
