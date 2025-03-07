@@ -1,0 +1,7 @@
+Tech Stack:
+
+Programming Languages: Python, JavaScript
+Frontend: HTML, CSS, JavaScript
+Backend: Flask
+AI Model: Google Gemma-2-2b-it (via Hugging Face Inference API)
+Data Structure: JSON-based tree hierarchy for organizing topics in Grade 9 & Grade 10
