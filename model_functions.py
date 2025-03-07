@@ -159,7 +159,7 @@ class AdaptiqCLI:
 if __name__ == "__main__":
     with open ("topics.json", 'r') as file:
         topic_dictionary = json.load(file) 
-    model_id = "mistralai/Mistral-7B-Instruct-v0.3"  # Replace with your model ID
-    token = "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"  # Replace with your Hugging Face token
+    model_id = "mistralai/Mistral-7B-Instruct-v0.3"  #model ID
+    token = "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"  #Hugging Face token
     adaptiq_cli = AdaptiqCLI(model_id, token, topic_dictionary)
     adaptiq_cli.start_testing()
