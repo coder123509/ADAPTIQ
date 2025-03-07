@@ -1,0 +1,343 @@
+/*Base HTML*/
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: center; /* Center the header content horizontally */
+    align-items: center; /* Align vertically */
+    background-color: rgb(50, 50, 50);
+    padding: 2%;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header h1 {
+    color: rgb(0, 255, 175);
+    margin: 0; /* Remove default margin */
+    font-size: 3em;
+}
+
+/* Main Content Styles */
+main {
+    background-color: rgb(35, 35, 35);
+    padding: 20px; /* Add space around main content */
+    min-height: 100vh; /* Ensure main takes most of the screen height */
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(50, 50, 50);
+}
+
+footer p {
+    color: rgb(0, 255, 175);
+    margin: 0; /* Remove default margin */
+}
+
+/*Home HTML*/
+/* Main Section Styles */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    padding: 20px;
+    gap: 20px; /* Space between the sections */
+    height: 100vh;
+}
+
+/* Interactive Section Styles */
+.interactive_section {
+    display: flex;
+    flex-direction: row; /* Horizontal layout for picture and right-side content */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Align items vertically */
+    gap: 30px; /* Space between the picture and right-side content */
+}
+
+/* Image Section Styles */
+.image_section {
+    text-align: center;
+}
+
+.image_section .project_image {
+    max-width: 500px;
+    object-fit: cover;
+    border: 0px solid rgb(0, 255, 175);
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+/* Right Side Content */
+.right_side {
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+    align-items: center; 
+    justify-content: flex-start;
+}
+
+/* Profile Picture Section */
+.profile_picture_section h3 {
+    color: rgb(0, 255, 175);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.profile_picture_section .profile_picture_placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(50, 50, 50);
+    color: rgb(124, 124, 124); 
+    font-size: 1em;
+    font-style: italic;
+}
+
+/* Button Section */
+.button_set {
+    display: flex;
+    gap: 20px; 
+    flex-direction: column;
+}
+
+.button_set button {
+    padding: 10px 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: rgb(35, 35, 35);
+    background-color: rgb(0, 255, 175);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button_set button:hover {
+    background-color: rgb(0, 200, 150); 
+}
+
+.about_section {
+    text-align: center;
+    max-width: 800px; 
+    margin-top: 20px;
+}
+
+.about_section h2 {
+    color: rgb(0, 255, 175);
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.about_section p {
+    line-height: 1.6; 
+    font-size: 1.5em;
+    color: lightgray; 
+}
+
+/*Select Topic HTML*/
+.select-topic {
+    display: flex;
+    margin: 0 auto;
+    max-width: 800px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.select-topic-h2 {
+    color: rgb(0, 255, 175);
+    font-size: 2.5em;
+}
+
+.select-topic-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1.2em;
+    color: rgb(0, 255, 175);
+    margin-bottom: 5px;
+}
+
+select {
+    width: 400px;
+    padding: 10px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(50, 50, 50);
+    color: lightgray;
+    margin-bottom: 30px;
+}
+
+select:focus {
+    border: 2px solid rgb(0, 255, 175);
+    outline: none;
+}
+
+option {
+    background-color: rgb(50, 50, 50);
+    color: rgb(0, 255, 175);
+}
+
+.assessment-button{
+    margin-top: 60px;
+    padding: 10px 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: rgb(35, 35, 35);
+    background-color: rgb(0, 255, 175);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/*Generate Question HTML*/
+.generate-question {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1000px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.generate-question-h4 {
+    color: lightgray;
+    font-size: 1.2em;
+    margin: 5px;
+    font-weight: normal;
+}
+
+.generate-question-p {
+    color: rgb(0, 255, 175);
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.generate-question-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.generate-question-label {
+    color: lightgray;
+    margin-bottom: 5px;
+}
+
+.generate-question-textarea {
+    width: 1000px;
+    height: 300px;
+    padding: 10px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(50, 50, 50);
+    color: lightgray;
+    margin-bottom: 30px;
+    resize: vertical;
+}
+
+.generate-question-textarea:focus {
+    border: 2px solid rgb(0, 255, 175);
+    outline: none;
+}
+
+.generate-question-button {
+    padding: 10px 20px;
+    max-width: 300px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgb(35, 35, 35);
+    background-color: rgb(0, 255, 175);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.generate-feedback-p {
+    color: lightgray;
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.generate-feedback-answer {
+    color: rgb(0, 255, 175);
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.profile {
+    display: flex;
+    margin: 0 auto;
+    max-width: 800px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.profile-header {
+    color: rgb(0, 255, 175);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.profile-stat {
+    color: lightgray;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.profile-subheader {
+    color: lightgray;
+    font-size: 2em;
+    margin-bottom: 0px;
+}
+
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.profile-item {
+    color: rgb(0, 255, 175);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
