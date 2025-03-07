@@ -25,6 +25,7 @@ Why ADAPTIQ?
 ✅ Strengthens conceptual understanding – Students develop a solid grasp of fundamental concepts before tackling advanced topics.
 ✅ Personalized learning experience – AI adapts to each student’s learning pace and needs.
 ✅ Encourages real-world application – By reinforcing strong foundations, students can apply their knowledge more effectively in practical and competitive scenarios.
-Developers-
+
+Project Developers-
 👨‍💻 Abhinav Krishna Rayachoti 
 👩‍💻 Abhishek Varma
