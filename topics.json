@@ -1,0 +1,97 @@
+{
+    "Topics": {
+        "Grade 10": {
+            "Light": {
+                "Regular reflection": {},
+                "Image formation": {
+                    "Real image": {},
+                    "Virtual image": {}
+                },
+                "Reflection laws": {
+                    "First Law of Reflection": {},
+                    "Second Law of Reflection": {}
+                },
+                "Lenses": {
+                    "Refractive Index": {}
+                }
+            },
+            "Electricity": {
+                "Electric current": {},
+                "Ohm's law": {},
+                "Circuits": {
+                    "Series circuits": {},
+                    "Parallel circuits": {}
+                }
+            },
+            "Electromagnetism": {
+                "Magnetism": {
+                    "Magnetic fields": {},
+                    "Electromagnets": {}
+                },
+                "Force II": {
+                    "Electromagnetic force": {}
+                },
+                "Current": {
+                    "Electric current": {},
+                    "Electric power": {}
+                }
+            }
+        },
+        "Grade 9": {
+            "Sound": {
+                "Production of Sound": {
+                    "Vibrations": {},
+                    "Sound waves": {}
+                },
+                "Transmission of Sound": {
+                    "Medium": {},
+                    "Speed of Sound": {}
+                },
+                "Frequency": {},
+                "Time Period": {},
+                "Amplitude": {},
+                "Hearing": {}
+            },
+            "Work and Energy": {
+                "Force I": {
+                    "Newton's First Law": {},
+                    "Newton's Second Law": {}
+                },
+                "Work": {
+                    "Work done by force": {},
+                    "Mechanical work": {}
+                },
+                "Energy": {
+                    "Kinetic energy": {},
+                    "Potential energy": {}
+                }
+            },
+            "Gravitation": {
+                "Force I": {
+                    "Gravitational force": {},
+                    "Weight": {}
+                },
+                "Pressure": {
+                    "Atmospheric pressure": {},
+                    "Pressure in fluids": {}
+                },
+                "Free fall": {
+                    "Acceleration due to gravity": {}
+                }
+            },
+            "Force and Laws of Motion": {
+                "Force I": {
+                    "Newton's Laws": {}
+                },
+                "Inertia": {},
+                "Friction": {}
+            },
+            "Motion": {
+                "Distance": {},
+                "Speed": {},
+                "Velocity": {},
+                "Acceleration": {}
+            }
+        }
+    }
+}
